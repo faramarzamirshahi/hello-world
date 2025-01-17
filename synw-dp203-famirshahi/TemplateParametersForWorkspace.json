@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "synw-dp203-famirshahi"
+		},
+		"AzureSqlDatabase1_password": {
+			"value": ""
+		},
+		"synw-dp203-famirshahi-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:synw-dp203-famirshahi.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"value": "dp203faramarz.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"value": "AdventureWorks"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"value": "sqladmin"
+		},
+		"synw-dp203-famirshahi-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://dlsdp203famirshahi.dfs.core.windows.net"
+		}
+	}
+}
