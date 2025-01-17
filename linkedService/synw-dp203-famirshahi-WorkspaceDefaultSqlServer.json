@@ -1,0 +1,20 @@
+{
+	"name": "synw-dp203-famirshahi-WorkspaceDefaultSqlServer",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"typeProperties": {
+			"connectionString": "Data Source=tcp:synw-dp203-famirshahi.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"parameters": {
+			"DBName": {
+				"type": "String"
+			}
+		},
+		"type": "AzureSqlDW",
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		},
+		"annotations": []
+	}
+}

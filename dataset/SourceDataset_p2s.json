@@ -1,0 +1,23 @@
+{
+	"name": "SourceDataset_p2s",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "CustomerID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CompanyName",
+				"type": "nvarchar"
+			}
+		]
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

@@ -1,0 +1,17 @@
+{
+	"name": "External table - SQL pool",
+	"properties": {
+		"content": {
+			"query": "CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'farah@diba123';\nGO\n\nCREATE DATABASE SCOPED CREDENTIAL WorkspaceIdentity\nWITH IDENTITY = 'Managed Identity'\n\nCREATE DATABASE SCOPED CREDENTIAL sasToken\nwith identity = 'SHARED ACCESS SIGNATURE' , \nSECRET = 'sv=2022-11-02&ss=b&srt=sco&sp=rlx&se=2025-04-30T04:28:10Z&st=2025-01-13T21:28:10Z&spr=https&sig=RmXrXEMVU99crQYvWcZUcfT3bRSYfOuqr0jv8cBcAj4%3D'\n\nCREATE DATABASE SCOPED CREDENTIAL SasCredential\nWITH IDENTITY = 'SHARED ACCESS SIGNATURE', SECRET = 'sv=2022-11-02&ss=b&srt=c&sp=rl&se=2025-04-30T04:13:07Z&st=2025-01-13T21:13:07Z&spr=https&sig=BeJtcVs5BAnEGYrdmYIxWYPbXhcxwRrAaWV0pYIPt50%3D'\nGO\n\ndrop external data source srcActivityLog;\n\nCREATE EXTERNAL DATA SOURCE srcActivityLog\nWITH \n(\n    LOCATION='https://dlsdp203famirshahi.blob.core.windows.net/data',\n    CREDENTIAL=sasToken\n)\n\n\n\nCREATE EXTERNAL FILE FORMAT parquetFileFormat WITH\n(\n    FORMAT_TYPE=PARQUET,\n    DATA_COMPRESSION='org.apache.hadoop.io.compress.SnappyCodec'\n)\n\nDROP EXTERNAL TABLE ActivityLog;\n\nCREATE EXTERNAL TABLE ActivityLog\n(\n   [Correlationid] varchar(200),\n   [Operationname] varchar(300),\n   [Status] varchar(100),\n   [Eventcategory] varchar(100),\n   [Level] varchar(100),\n   [Time] varchar(100),\n   [Subscription] varchar(200),\n   [Eventinitiatedby] varchar(1000),\n   [Resourcetype] varchar(300),\n   [Resourcegroup] varchar(1000),\n   [Resource] varchar(2000))\nWITH (\n    LOCATION='/ActivityLog01.parquet',\n    DATA_SOURCE=srcActivityLog,\n    FILE_FORMAT=parquetFileFormat\n)\n\nSELECT * FROM ActivityLog;\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "datapool",
+				"poolName": "datapool"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

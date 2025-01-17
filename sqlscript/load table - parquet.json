@@ -1,0 +1,17 @@
+{
+	"name": "load table - parquet",
+	"properties": {
+		"content": {
+			"query": "DROP TABLE PoolActivityLog;\n\n--TRUNCATE TABLE PoolActivityLog;\n\nCREATE TABLE PoolActivityLog\n(\n   [Correlationid] varchar(200),\n   [Operationname] varchar(300),\n   [Status] varchar(100),\n   [Eventcategory] varchar(100),\n   [Level] varchar(100),\n   [Time] varchar(100),\n   [Subscription] varchar(200),\n   [Eventinitiatedby] varchar(1000),\n   [Resourcetype] varchar(300),\n   [Resourcegroup] varchar(1000),\n   [Resource] varchar(2000)\n)\nWITH(\n    DISTRIBUTION=ROUND_ROBIN\n)\n\nCOPY INTO PoolActivityLog\nFROM 'https://dlsdp203famirshahi.blob.core.windows.net/data/ActivityLog01.parquet'\nWITH(\n    FILE_TYPE='PARQUET',\n    COMPRESSION ='Snappy',\n    CREDENTIAL=\n    (\n        IDENTITY='Shared Access Signature',\n        SECRET='sv=2022-11-02&ss=b&srt=sco&sp=rlx&se=2025-04-30T04:28:10Z&st=2025-01-13T21:28:10Z&spr=https&sig=RmXrXEMVU99crQYvWcZUcfT3bRSYfOuqr0jv8cBcAj4%3D'\n    )\n);\n\nTRUNCATE TABLE PoolActivityLog;\n\n\nselect * from PoolActivityLog;\n\nselect count(*) as RowCount from PoolActivityLog;\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "datapool",
+				"poolName": "datapool"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
