@@ -1,0 +1,17 @@
+{
+	"name": "FactDimensionJoin",
+	"properties": {
+		"content": {
+			"query": "Select c.CompanyName,p.Color,sum(f.OrderQty)\nfrom factSales f\njoin dimCustomer c on f.CustomerID = c.CustomerID\njoin dimProduct p on f.ProductID = p.ProductID\ngroup by c.CompanyName,p.Color;",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "datapool",
+				"poolName": "datapool"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
